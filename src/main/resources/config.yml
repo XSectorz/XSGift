@@ -1,0 +1,86 @@
+
+menu:
+  main:
+    title: "&8XSGift - Beta"
+    blocked_items:
+      material: BLACK_STAINED_GLASS_PANE
+      customModeldata: 0
+      name: "&r"
+      lore: []
+    confirm:
+      material: LIME_WOOL
+      customModeldata: 0
+      name: "&x&9&5&F&F&6&3ส่งไอเทม"
+      lore: []
+    permission:
+      material: OAK_SIGN
+      customModeldata: 0
+      name: "&x&7&5&E&6&F&FPermission"
+      lore:
+        - "&7ทำการเพิ่ม Permission สำหรับผู้ที่มี"
+        - "&7สิทธิที่กำหนดจะสามารถรับไอเทมดังกล่าวได้"
+        - "&r"
+        - "&x&A&6&E&A&F&Fสิทธิทั้งหมด:"
+        - "{xsgift:permission}"
+        - "&r"
+        - "&f &x&F&F&D&E&6&9เพื่อเพิ่มสิทธิ | &f &x&F&F&D&E&6&9เพื่อลบสิทธิ"
+    expected_user:
+      material: MINECART
+      customModeldata: 0
+      name: "&x&C&C&2&F&2&FExpected User"
+      lore:
+        - "&7เมื่อทำการเพิ่มชื่อผู้เล่นเข้าหมวดนี้ผู้เล่น"
+        - "&7ดังกล่าวจะไม่สามารถรับรางวัลได้"
+        - "&r"
+        - "&x&A&6&E&A&F&Fผู้เล่นทั้งหมด:"
+        - "{xsgift:expected_player}"
+        - "&r"
+        - "&f &x&F&F&D&E&6&9เพื่อเพิ่มผู้เล่น | &f &x&F&F&D&E&6&9เพื่อลบผู้เล่น"
+    included_user:
+      material: CHEST_MINECART
+      customModeldata: 0
+      name: "&x&9&D&D&F&5&AIncluded User"
+      lore:
+        - "&7เมื่อทำการเพิ่มชื่อผู้เล่นเข้าหมวดนี้ผู้เล่น"
+        - "&7ดังกล่าวจะสามารถรับรางวัลได้"
+        - "&r"
+        - "&x&A&6&E&A&F&Fผู้เล่นทั้งหมด:"
+        - "{xsgift:include_player}"
+        - "&r"
+        - "&f &x&F&F&D&E&6&9เพื่อเพิ่มผู้เล่น | &f &x&F&F&D&E&6&9เพื่อลบผู้เล่น"
+    world:
+      material: ENDER_PEARL
+      customModeldata: 0
+      name: "&x&C&1&6&9&D&FAllowed World"
+      lore:
+        - "&7ทำการเพิ่มโลกที่ผู้เล่นอยู่จะสามารถ"
+        - "&7ได้รับของรางวัลได้"
+        - "&r"
+        - "&x&A&6&E&A&F&Fโลกทั้งหมด:"
+        - "{xsgift:world}"
+        - "&r"
+        - "&f &x&F&F&D&E&6&9เพื่อเพิ่มชื่อโลก | &f &x&F&F&D&E&6&9เพื่อลบชื่อโลก"
+  confirm:
+    title: "&8XSGift Confirm - Beta"
+    blocked_items:
+      material: BLACK_STAINED_GLASS_PANE
+      customModeldata: 0
+      name: "&r"
+      lore: []
+    confirm:
+      material: LIME_WOOL
+      customModeldata: 0
+      name: "&x&9&5&F&F&6&3ส่งไอเทม"
+      lore: []
+    cancel:
+      material: RED_WOOL
+      customModeldata: 0
+      name: "&x&D&E&4&3&4&3ย้อนกลับ"
+      lore: []
+    itemlist:
+      material: CHEST
+      customModeldata: 0
+      name: "&x&C&1&6&9&D&Fไอเทมทั้งหมด"
+      lore:
+        - "&7มีไอเทมทั้งหมด &x&5&0&D&E&6&7{amount} &7ชิ้น"
+        - "{xsgift:item}"

@@ -1,0 +1,9 @@
+name: XSGift
+version: '${project.version}'
+main: net.xsapi.panat.xsgift.main.core
+api-version: 1.19
+authors: [ PanatXsectorZ ]
+description: XSGift for everyone!
+commands:
+  xsgift:
+    description: command for xsgift plugin
