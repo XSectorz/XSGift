@@ -22,6 +22,10 @@ public class chatEvent implements Listener {
             if(core.xsUser.containsKey(p.getUniqueId())) {
                 xsuser XSUser = core.xsUser.get(p.getUniqueId());
 
+                if(XSUser.xsEdit == null) {
+                    return;
+                }
+
                 if(e.getMessage().equalsIgnoreCase("ยกเลิก")) {
                     XSUser.setEditType(XSEditType.NONE);
                     Bukkit.getScheduler().scheduleSyncDelayedTask(core.getPlugin(), new Runnable() {
