@@ -1,6 +1,11 @@
 package net.xsapi.panat.xsgift.event;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
 import net.xsapi.panat.xsgift.config.configuration;
+import net.xsapi.panat.xsgift.handlers.XSGiftModelTypeAdapter;
+import net.xsapi.panat.xsgift.handlers.xsgift_model;
 import net.xsapi.panat.xsgift.main.core;
 import net.xsapi.panat.xsgift.ui.xsgiftConfirmUI;
 import net.xsapi.panat.xsgift.ui.xsgiftUI;
@@ -165,39 +170,59 @@ public class InventoryEvent implements Listener {
 
                     p.sendMessage(xsutils_color.messagesConfig("send_success"));
 
-                    for(Player target : Bukkit.getOnlinePlayers()) {
-                        if(!target.getName().equalsIgnoreCase(p.getName())) {
-                            if(!XSUser.getExpecteduser().isEmpty()) {
-                                if(XSUser.getExpecteduser().contains(target.getName())) {
-                                    continue;
-                                }
-                            }
-                            if(!XSUser.getIncludeuser().isEmpty()) {
-                                if(!XSUser.getIncludeuser().contains(target.getName())) {
-                                    continue;
-                                }
-                            }
+                    if(core.getUsingRedis()) {
+                        xsgift_model giftModel = new xsgift_model(p.getName(),XSUser.getItemsList(),XSUser.getPermission(),XSUser.getWorld(),XSUser.getExpecteduser(),XSUser.getIncludeuser());
 
-                            if(!XSUser.getWorld().isEmpty()) {
-                                if(!XSUser.getWorld().contains(target.getWorld().getName())) {
-                                    continue;
-                                }
-                            }
+                        GsonBuilder gsonBuilder = new GsonBuilder();
+                        TypeAdapter<xsgift_model> xsgiftModelTypeAdapter = new XSGiftModelTypeAdapter();
+                        gsonBuilder.registerTypeAdapter(xsgift_model.class, xsgiftModelTypeAdapter);
+                        Gson gson = gsonBuilder.create();
 
-                            if(!XSUser.getPermission().isEmpty()) {
-                                for(String perm : XSUser.getPermission()) {
-                                    if(!target.hasPermission(perm)) {
-                                       continue;
+                        String json = gson.toJson(giftModel);
+                        core.sendMessageToRedisAsync("XSGift/Channel/" + core.getRedisHost() ,json);
+                        Bukkit.getLogger().info("Send!");
+                    } else {
+                        for(Player target : Bukkit.getOnlinePlayers()) {
+                            if(!target.getName().equalsIgnoreCase(p.getName())) {
+                                if(!XSUser.getExpecteduser().isEmpty()) {
+                                    if(XSUser.getExpecteduser().contains(target.getName())) {
+                                        continue;
                                     }
                                 }
-                            }
+                                if(!XSUser.getIncludeuser().isEmpty()) {
+                                    if(!XSUser.getIncludeuser().contains(target.getName())) {
+                                        continue;
+                                    }
+                                }
 
-                            for(ItemStack it : XSUser.getItemsList()) {
-                                target.getInventory().addItem(it);
+                                if(!XSUser.getWorld().isEmpty()) {
+                                    if(!XSUser.getWorld().contains(target.getWorld().getName())) {
+                                        continue;
+                                    }
+                                }
+
+                                if(!XSUser.getPermission().isEmpty()) {
+                                    boolean isHavePermission = true;
+                                    for(String perm : XSUser.getPermission()) {
+                                        if(!target.hasPermission(perm)) {
+                                            isHavePermission = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if(!isHavePermission) {
+                                        continue;
+                                    }
+                                }
+
+                                for(ItemStack it : XSUser.getItemsList()) {
+                                    target.getInventory().addItem(it);
+                                }
+                                target.sendMessage(xsutils_color.messagesConfig("get_success"));
                             }
-                            target.sendMessage(xsutils_color.messagesConfig("get_success"));
                         }
                     }
+
                     p.closeInventory();
                 }
 

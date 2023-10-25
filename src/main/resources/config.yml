@@ -1,4 +1,11 @@
 
+redis:
+  enable: false
+  host: localhost
+  port: 6379
+  password: ''
+  host-server: "SyncSurvival/01" #name of host (other server must be the same)
+
 menu:
   main:
     title: "&8XSGift - Beta"
