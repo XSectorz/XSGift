@@ -34,6 +34,7 @@ public final class core extends JavaPlugin {
     private static String redisHost;
     private static int redisPort;
     private static String password;
+    private static String redisHostServer;
 
     public static core plugin;
 
@@ -45,6 +46,8 @@ public final class core extends JavaPlugin {
     public static String getRedisHost() {
         return redisHost;
     }
+
+    public static String getRedisHostServer() { return redisHostServer; }
 
     public static boolean getUsingRedis() {
         return isUsingRedis;
@@ -82,7 +85,7 @@ public final class core extends JavaPlugin {
 
         if(getUsingRedis()) {
             redisConnection();
-            subscribeToChannelAsync("XSGift/Channel/" + redisHost);
+            subscribeToChannelAsync("XSGift/Channel/" + redisHostServer);
         }
 
 
@@ -99,6 +102,8 @@ public final class core extends JavaPlugin {
         redisHost = configuration.customConfig.getString("redis.host");
         redisPort = configuration.customConfig.getInt("redis.port");
         password = configuration.customConfig.getString("redis.password");
+        redisHostServer = configuration.customConfig.getString("redis.host-server");
+
 
         try {
             Jedis jedis = new Jedis(redisHost, redisPort);
@@ -149,7 +154,7 @@ public final class core extends JavaPlugin {
                         //Bukkit.getConsoleSender().sendMessage("Received data from ---> " + channel);
 
                         //Channel ---> XSGift/Channel/SyncSurvival/01
-                        if(channel.equalsIgnoreCase("XSGift/Channel/" + redisHost)) {
+                        if(channel.equalsIgnoreCase("XSGift/Channel/" + redisHostServer)) {
                             GsonBuilder gsonBuilder = new GsonBuilder();
                             TypeAdapter<xsgift_model> xsgiftModelTypeAdapter = new XSGiftModelTypeAdapter();
                             gsonBuilder.registerTypeAdapter(xsgift_model.class, xsgiftModelTypeAdapter);

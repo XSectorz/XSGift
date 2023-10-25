@@ -179,7 +179,7 @@ public class InventoryEvent implements Listener {
                         Gson gson = gsonBuilder.create();
 
                         String json = gson.toJson(giftModel);
-                        core.sendMessageToRedisAsync("XSGift/Channel/" + core.getRedisHost() ,json);
+                        core.sendMessageToRedisAsync("XSGift/Channel/" + core.getRedisHostServer() ,json);
                         Bukkit.getLogger().info("Send!");
                     } else {
                         for(Player target : Bukkit.getOnlinePlayers()) {
